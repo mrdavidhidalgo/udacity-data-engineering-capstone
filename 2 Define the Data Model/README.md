@@ -14,8 +14,9 @@ The model was divided in dimension and fact tables:
 
 1. Data exploration of all datasets with Jupyter notebooks
 2. Uploaded processed datasets to S3 using a python script
-3. Create a Redis cluster by code by code
+3. Create a Redshift cluster by code by code
 4. Use Apache Airflow to defined a pipeline to move data from S3 to Redshift
-    a. Create tables into Redshift
-    b. Load data in staging tables
-    c. Load data in fact and dim tables using staging tables
+
+A. Create tables into Redshift
+B. Load data in staging tables
+C. Load data in fact and dim tables using staging tables
