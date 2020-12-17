@@ -44,6 +44,23 @@ The data model helps us to address the purpose of the project, to the extent tha
 
 ## Data dictionary
 
+### Dimension tables
+
+1. `dim_cities`: Contains information about the cities, their population and location.
+   * `city_id`: The name of the city concat the state's code.
+   * `state`: A code two-letters of the state.
+   * `country`: The code of the country(2 letters).
+   * `population`: Estimation of the population for the given city.
+   * `latitude`: The latitude(location) of city
+   * `longitude`: The longitude(location) of city.
+2. `dim_date_hour`: Contains information related to the date and hour  of a accident occurs.
+   * `date_hour_id`: The date plus a hour, In format 'yyyy-mm-dd HH'
+   * `year`: The year of the date
+   * `month`: The month of the date (1 and 12).
+   * `day`: The number of the day of the month.
+   * `week`: The number of week of the year.
+   * `hour`: The hour of day the accidents occurred.
+
 ### Fact table
 
 * `fact_accidents`:
