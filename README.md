@@ -53,4 +53,4 @@ In this moment the pipeline take around 5 minutes to load, in the worst case it 
 
 ## The database needed to be accessed by 100+ people.
 
-The main problem of increasing users in the database is the way Redshift operates, the easiest way to meet this need is by generating clusters with duplicate data to make queries.
+The main problem of increasing users in the database is the way Redshift operates, the easiest way to meet this need is copies of the Redshift cluster to make queries.
