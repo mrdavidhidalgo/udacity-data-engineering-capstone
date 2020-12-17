@@ -17,6 +17,9 @@ class DataQualityOperator(BaseOperator):
         self.dq_checks = dq_checks
 
     def execute(self, context):
+        """
+        Execute a quality control over datasets loaded into Redshift
+        """
         redshift = PostgresHook(self.conn_id)
 
         for item in self.dq_checks:

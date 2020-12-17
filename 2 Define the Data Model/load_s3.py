@@ -4,7 +4,9 @@ import configparser
 
 
 def upload_s3():
-
+    """
+    Moves datasets to S3. This function load the prepared_datasets to Amazon S3
+    """
     config = configparser.ConfigParser()
     config.read_file(open('aws.cfg'))
 

@@ -33,6 +33,34 @@ It is a database that supports terabytes of data, with horizontal scaling and ex
 4. A pipeline is built on Apache Airflow to load data from Amazon S3 to Redshift into staging tables
 5. Some queries are executed in redshift
 
+## Data Model
+
+The data model defined for this exercise is described below:
+
+![Data Model](../images/table_relations.png)
+
+The data model helps us to address the purpose of the project, to the extent that we can relate the accidents with the cities where they occurred and analyze particularities of the city such as the number of inhabitants and accidents such as weather conditions and others.
+
+## Data dictionary
+
+### Fact table
+
+* `fact_accidents`:
+  * `accident_id`: A identifier for the table provided by dataset.
+  * `city_id`: A reference for relation `dim_cities` represent a city
+  * `date_hour_id`:  A reference for relation `dim_date_hour` represent a date and an hour
+  * `source`: Indicates source of the accident report (i.e. the API which reported the accident.)
+  * `TMC`: A traffic accident may have a Traffic Message Channel (TMC) code which provides more detailed description of the event.
+  * `temperature`: Shows the temperature (in Fahrenheit).
+  * `start_time`: Shows start time of the accident in local time zone.
+  * `end_time`: Shows end time of the accident in local time zone. End time here refers to when the impact of accident on traffic flow was dismissed.
+  * `zipcode`: Shows the postal code in address field.
+  * `description`: Shows natural language description of the accident.
+  * `weather_condition`: Shows the weather condition (rain, snow, thunderstorm, fog, etc.)
+  * `latitude`: Shows latitude in GPS coordinate of the start point.
+  * `longitude`: Shows longitude in GPS coordinate of the start point.
+
+
 ## How often the data should be updated?
 The data must be updated every month, this because the accident records are totaled every month, another viable option would be annually, it should be remembered that these data must be consolidated before being processed, so the periodicity cannot be less
 
@@ -54,3 +82,48 @@ In this moment the pipeline take around 5 minutes to load, in the worst case it 
 ## The database needed to be accessed by 100+ people.
 
 The main problem of increasing users in the database is the way Redshift operates, the easiest way to meet this need is copies of the Redshift cluster to make queries.
+
+
+## Result queries
+
+some data analysis queries are listed below:
+
+### Top ten of cities with highest number of accidents in 2018:
+
+```
+SELECT c.state,c.city,count(1) FROM fact_accidents  a
+JOIN  dim_date_hour d USING (date_hour_id)
+JOIN dim_cities c  USING (city_id)
+WHERE d.year=2018
+GROUP by 1,2
+ORDER by 3 desc
+LIMIT 10
+```
+[Result](images/query_result_1.png)  
+
+### Top ten of cities with the highest number of accidents per inhabitant
+
+```
+SELECT state, city, countA::float/population::float, population, countA FROM (
+SELECT c.state, c.city, c.population ,count(1) as countA
+FROM fact_accidents a JOIN dim_cities c using (city_id)
+WHERE c.population is not null
+GROUP BY 1,2,3 ORDER BY 4 desc)as a
+ORDER BY 3 desc
+LIMIT 10
+```
+[Result](images/query_result_2.png)
+
+
+
+### Top ten of cities with the lowest number of accidents per inhabitant
+```
+SELECT state, city, countA::float/population::float, population, countA FROM (
+SELECT c.state, c.city, c.population, count(1) as countA
+FROM fact_accidents a JOIN dim_cities c USING (city_id)
+WHERE c.population IS NOT NULL
+GROUP by 1,2,3 ORDER BY 4 DESC)as a
+ORDER BY 3 ASC
+LIMIT 10  
+```
+[Result](images/query_result_3.png)

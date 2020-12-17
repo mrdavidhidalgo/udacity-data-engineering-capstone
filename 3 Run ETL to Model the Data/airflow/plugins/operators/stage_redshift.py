@@ -24,8 +24,12 @@ class StageToRedshiftOperator(BaseOperator):
         self.s3_key = s3_key
 
     def execute(self, context):
+        """
+        Load data from S3 to Redshift,
+        load a staging table using datasets stored in S3
+        """
         connection = BaseHook.get_connection(self.aws_credentials)
-        
+
         redshift_hook = PostgresHook(postgres_conn_id=self.redshift_conn_id)
         redshift_copy = """
             COPY {}
@@ -37,7 +41,7 @@ class StageToRedshiftOperator(BaseOperator):
             TRUNCATECOLUMNS
          """
         s3_location = f"s3://{self.s3_bucket}/{self.s3_key}"
-        self.log.info(f'The S3 location: {s3_location}') 
+        self.log.info(f'The S3 location: {s3_location}')
         sql = redshift_copy.format(
                 self.table,
                 s3_location,

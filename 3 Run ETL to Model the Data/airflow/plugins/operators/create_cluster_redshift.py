@@ -21,6 +21,9 @@ class CreateRedshiftClusterOperator(BaseOperator):
         self.aws_credentials = aws_credentials
 
     def execute(self, context):
+        """
+        Create a Redshift cluster usign parameters stored in file aws.cfg
+        """
         aws_connection = BaseHook.get_connection(self.aws_credentials)
         redshift = PostgresHook(self.conn_id)
         redshift_connection = redshift.get_connection(self.conn_id)

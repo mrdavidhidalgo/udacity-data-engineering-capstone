@@ -3,6 +3,10 @@ import boto3
 
 
 def create_cluster():
+    """
+    Create a Redshift cluster using infrastructure as code,
+    credentials are in file aws.cfg
+    """
     config = configparser.ConfigParser()
     config.read_file(open('aws.cfg'))
     KEY = config.get('AWS', 'KEY')
