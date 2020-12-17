@@ -41,8 +41,8 @@ class StageToRedshiftOperator(BaseOperator):
         sql = redshift_copy.format(
                 self.table,
                 s3_location,
-                connection.login,#'AKIA56ZGMRFF3HEZQDBV',
-                connection.password #'/1XTCzSZZ4myh5oaAxxAy5SXAKUyjK3awl+Q5Xmt'
+                connection.login,
+                connection.password
         )
         self.log.info(f'Executing SQL: {redshift_copy}')
         redshift_hook.run(sql)
