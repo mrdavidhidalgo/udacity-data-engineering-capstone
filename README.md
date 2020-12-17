@@ -38,7 +38,7 @@ It is a database that supports terabytes of data, with horizontal scaling and ex
 
 The data model defined for this exercise is described below:
 
-![Data Model](../images/table_relations.png)
+![Data Model](images/table_relations.png)
 
 The data model helps us to address the purpose of the project, to the extent that we can relate the accidents with the cities where they occurred and analyze particularities of the city such as the number of inhabitants and accidents such as weather conditions and others.
 
@@ -100,7 +100,7 @@ GROUP by 1,2
 ORDER by 3 desc
 LIMIT 10
 ```
-[Result](images/query_result_1.png)  
+![Result](images/query_result_1.png)  
 
 ### Top ten of cities with the highest number of accidents per inhabitant
 
@@ -113,8 +113,7 @@ GROUP BY 1,2,3 ORDER BY 4 desc)as a
 ORDER BY 3 desc
 LIMIT 10
 ```
-[Result](images/query_result_2.png)
-
+![Result](images/query_result_2.png)
 
 
 ### Top ten of cities with the lowest number of accidents per inhabitant
@@ -127,4 +126,4 @@ GROUP by 1,2,3 ORDER BY 4 DESC)as a
 ORDER BY 3 ASC
 LIMIT 10  
 ```
-[Result](images/query_result_3.png)
+![Result](images/query_result_3.png)
