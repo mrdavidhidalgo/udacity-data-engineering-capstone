@@ -1,6 +1,7 @@
 # Udacity's Capstone Project
 
-This project builds a pipeline using Apache Airflow based on public datasets with Amazon redshift as main database
+This project builds a pipeline using Apache Airflow based on public datasets with Amazon redshift as main database.
+These dataset will be used to obtain knowledge about the dynamics of accidents in the United States, where they occur, how often and under what conditions, these data could be used by people in charge of making decisions about mobility and projection of road construction, we hope it will also be used by bigdata enthusiasts.
 
 ## Datasets
 The datasets were taken from www.kaggle.com
