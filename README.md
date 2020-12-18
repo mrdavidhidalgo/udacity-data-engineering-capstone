@@ -34,6 +34,15 @@ It is a database that supports terabytes of data, with horizontal scaling and ex
 4. A pipeline is built on Apache Airflow to load data from Amazon S3 to Redshift into staging tables
 5. Some queries are executed in redshift
 
+## How run the program?
+
+1. Download datasets from [US accidents](https://smoosavi.org/datasets/us_accidents) and [World cities](https://www.kaggle.com/okfn/world-cities)
+2. Prepare datasets with the [python script]("https://github.com/mrdavidhidalgo/udacity-data-engineering-capstone/blob/master/1%20Explore%20and%20Assess%20the%20Data/prepared_datasets.py)
+3. Copy datasets to S3 using [script](https://github.com/mrdavidhidalgo/udacity-data-engineering-capstone/blob/master/2%20Define%20the%20Data%20Model/load_s3.py)
+4. Run Airflow using [Docker compose file](https://github.com/mrdavidhidalgo/udacity-data-engineering-capstone/blob/master/3%20Run%20ETL%20to%20Model%20the%20Data/docker-compose.yml)
+```
+docker-compose up
+``
 ## Data Model
 
 The data model defined for this exercise is described below:
