@@ -42,7 +42,8 @@ It is a database that supports terabytes of data, with horizontal scaling and ex
 4. Run Airflow using [Docker compose file](https://github.com/mrdavidhidalgo/udacity-data-engineering-capstone/blob/master/3%20Run%20ETL%20to%20Model%20the%20Data/docker-compose.yml)
 ```
 docker-compose up
-``
+```
+
 ## Data Model
 
 The data model defined for this exercise is described below:
